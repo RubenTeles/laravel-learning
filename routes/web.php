@@ -1,14 +1,25 @@
 <?php
 
-use App\Http\Controllers\{PostController, CategoryController, UserController,
-	TaskController, RegisterController, SessionController};
+use App\Http\Controllers\{CommentController,
+	NewsletteController,
+	PostController,
+	CategoryController,
+	UserController,
+	TaskController,
+	RegisterController,
+	SessionController};
 use App\Models\{Post, Category, User};
 use Illuminate\Support\Facades\Route;
+
+
 
 Route::get('/', [PostController::class, 'index']);
 
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
+Route::post('/posts/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
+
+Route::post('newsletter', NewsletteController::class);
 
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
