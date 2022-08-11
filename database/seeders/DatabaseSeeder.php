@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use \App\Models\{User, Category, Post};
+use App\Models\{Comment, User, Category, Post};
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,7 +43,11 @@ class DatabaseSeeder extends Seeder
 			'category_id' => $hobbies->id
 		]);
 
-	   // $user_id = User::factory('App\Location')->create(['id' => $user->id]);
+		Comment::factory(10)->create();
+	    User::factory(10)->create();
+
+
+	    // $user_id = User::factory('App\Location')->create(['id' => $user->id]);
 
 
 	    //$user = User::factory(1)->create(['event_id' => $event->id]);
