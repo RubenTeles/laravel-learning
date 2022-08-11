@@ -33,7 +33,11 @@
 
 			<footer class="flex justify-between items-center mt-8">
 				<div class="flex items-center text-sm">
-					<img src="/images/lary-avatar.svg" alt="Lary avatar">
+					@if($post->author->image)
+						<img src="{{ url("storage/{$post->author->image}") }}" alt="" width="56" height="63" class="rounded-xl">
+					@else
+						<img src="/images/lary-avatar.svg" alt="Lary avatar">
+					@endif
 					<a href="?author={{ $post->author->username }}">
 						<div class="ml-3">
 							<h5 class="font-bold">{{ $post->author->name }}</h5>

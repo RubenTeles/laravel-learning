@@ -19,8 +19,15 @@ class RegisterController extends Controller
 			'name' => ['required', 'min:3', 'max:255'],
 			'username' => ['required', 'min:3', 'max:255', 'unique:users,username'],
 			'email' => ['required', 'email', 'unique:users,email'],
-			'password' => ['required', 'min:7']
+			'password' => ['required', 'min:7'],
+			'image' => ['nullable', 'image', 'max:1024']
 		]);
+
+		if ($attributes['image'])
+		{
+			$extension = $attributes['image']->getClientOriginalExtension();
+			$attributes['image'] = $attributes['image']->storeAs('users', "{$attributes['username']}.{$extension}");
+		}
 
 		$user = User::create($attributes);
 

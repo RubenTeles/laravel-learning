@@ -3,8 +3,11 @@
 		<form method="POST" action="/posts/{{ $post->slug }}/comments">
 			@csrf
 			<header class="flex items-center">
-				<img src="https://i.pravatar.cc/60?u={{ auth()->id() }}"
-					 alt="" width="40" height="40" class="rounded-full">
+				@if($image = auth()->user()->image)
+					<img src="{{ url("storage/{$image}") }}" alt="" width="60" height="60" class="rounded-xl">
+				@else
+					<img src="https://i.pravatar.cc/60?u={{ auth()->id() }}" alt="" width="40" height="40" class="rounded-full">
+				@endif
 				<h3 class="font-bold ml-4">{{ auth()->user()->name }}</h3>
 			</header>
 
