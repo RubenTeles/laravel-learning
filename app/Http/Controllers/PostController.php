@@ -24,4 +24,12 @@ class PostController extends Controller
 		]);
 	}
 
+	public function create (Request $request)
+	{
+		$number = $request->input('number', 1);
+		$createNumber = $number ?: 1;
+		Post::factory($createNumber)->create(['user_id' => $request->user()->id]);
+		return back();
+	}
+
 }

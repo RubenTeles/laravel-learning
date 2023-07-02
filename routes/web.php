@@ -8,14 +8,17 @@ use App\Http\Controllers\{CommentController,
 	TaskController,
 	RegisterController,
 	SessionController};
-use App\Models\{Post, Category, User};
+use App\Models\{Comment, Post, Category, User};
 use Illuminate\Support\Facades\Route;
-
-
 
 Route::get('/', [PostController::class, 'index']);
 
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+
+Route::post('/posts/create/{number?}', [PostController::class, 'create'])
+     ->name('posts.create')
+     ->middleware('auth');
+
 
 Route::post('/posts/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
 
@@ -34,24 +37,6 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth'
 //Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
 
 //Route::get('authors/{author:username}', [UserController::class, 'show']);
-
-Route::post('/', function () {
-	//Post::create(
-	//    'title' => request('title'),
-	//    'body' => '<p>' . request('body') . '</p>',
-	//    'excerpt' => request('excerpt')
-	//);
-	//ddd(request('body'));
-	$post = new Post();
-
-	$post->title = request('title');
-	$post->body = '<p>' . request('body') . '</p>';
-	$post->excerpt = substr(request('body'), 0, 10);;
-	$post->slug = str_replace(' ', '-', strtolower(request('title')));
-	$post->save();
-
-	return back();
-});
 
 Route::get('/tasks', [TaskController::class, 'index']);
 
