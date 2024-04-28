@@ -3,3 +3,12 @@
 https://laracasts.com/series/laravel-8-from-scratch
 
 61/70
+
+
+Requesitos:
+- Laragon:
+  - Criar uma Base de dados mytodo
+  - Terminal:
+  	- php artisan migrate
+  	- php artisan db:seed
+- No brower: example-app.test
